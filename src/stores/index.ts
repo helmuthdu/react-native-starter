@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { all, spawn } from 'redux-saga/effects';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'remote-redux-devtools';
+import { reducer as formReducer } from 'redux-form';
 
 type StoreInstance = Store;
 
@@ -25,13 +26,14 @@ export default (
     applyMiddleware(...middleware)
   );
 
-  const rootReducer = () =>
-    combineReducers({
-      ...stores.filter(str => str.reducer).reduce((acc, str) => ({ ...acc, [str.name]: str.reducer }), {})
-    });
-
   // Create the store
-  const store = createStore(rootReducer(), composedEnhancers);
+  const store = createStore(
+    combineReducers({
+      form: formReducer,
+      ...stores.filter(str => str.reducer).reduce((acc, str) => ({ ...acc, [str.name]: str.reducer }), {})
+    }),
+    composedEnhancers
+  );
 
   sagaMiddleware.run(function*() {
     yield all(stores.filter(str => str.sagas).map(str => spawn(str.sagas)));
