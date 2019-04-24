@@ -1,13 +1,12 @@
 import { StyleProvider } from 'native-base';
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
 import createStore from './stores';
 import getTheme from './theme/components';
-import variables from './theme/variables/platform';
-import { State as RootState, stores as rootStores } from './stores/modules';
+import { stores as rootStores } from './stores/modules';
 
 type Props = {
   skipLoadingScreen?: boolean;
@@ -35,7 +34,7 @@ export default class App extends React.Component<Props, State> {
       );
     } else {
       return (
-        <StyleProvider style={getTheme(variables)}>
+        <StyleProvider style={getTheme()}>
           <Provider store={this.state.store}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <AppNavigator />
