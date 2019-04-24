@@ -6,12 +6,11 @@ export default (variables = variable) => {
       height: null
     },
     height: variables.inputHeightBase,
-    color: '#000',
+    color: variables.inputColor,
     paddingLeft: 5,
     paddingRight: 5,
     flex: 1,
-    fontSize: variables.inputFontSize,
-    lineHeight: variables.inputLineHeight
+    fontSize: variables.inputFontSize
   };
 
   return inputTheme;

@@ -1,4 +1,4 @@
-import { PixelRatio } from 'react-native';
+import { PixelRatio, StatusBar } from 'react-native';
 
 import variable from './../variables/platform';
 
@@ -27,7 +27,9 @@ export default (variables = variable) => {
         'NativeBase.Title': {
           fontSize: variables.titleFontSize - 2,
           fontFamily: variables.titleFontfamily,
-          textAlign: 'center'
+          textAlign: 'center',
+          fontWeight: '500',
+          paddingBottom: 3
         },
         'NativeBase.Subtitle': {
           fontSize: variables.subTitleFontSize,
@@ -36,6 +38,17 @@ export default (variables = variable) => {
           textAlign: 'center'
         }
       }
+    },
+    '.transparent': {
+      backgroundColor: 'transparent',
+      borderBottomColor: 'transparent',
+      elevation: 0,
+      shadowColor: null,
+      shadowOffset: null,
+      shadowRadius: null,
+      shadowOpacity: null,
+      paddingTop: platform === 'android' ? StatusBar.currentHeight : undefined,
+      height: platform === 'android' ? variables.toolbarHeight + StatusBar.currentHeight : variables.toolbarHeight
     },
     '.noShadow': {
       elevation: 0,
@@ -58,7 +71,38 @@ export default (variables = variable) => {
       shadowOffset: null,
       shadowRadius: null,
       shadowOpacity: null,
-      borderBottomWidth: null
+      borderBottomWidth: null,
+      'NativeBase.Left': {
+        flex: 0.3
+      },
+      'NativeBase.Right': {
+        flex: 0.3
+      },
+      'NativeBase.Body': {
+        flex: 1,
+        'NativeBase.Segment': {
+          marginRight: 0,
+          alignSelf: 'center',
+          'NativeBase.Button': {
+            paddingLeft: 0,
+            paddingRight: 0
+          }
+        }
+      }
+    },
+    '.noLeft': {
+      'NativeBase.Left': {
+        width: platform === 'ios' ? undefined : 0,
+        flex: platform === 'ios' ? 1 : 0
+      },
+      'NativeBase.Body': {
+        'NativeBase.Title': {
+          paddingLeft: platform === 'ios' ? undefined : 10
+        },
+        'NativeBase.Subtitle': {
+          paddingLeft: platform === 'ios' ? undefined : 10
+        }
+      }
     },
     'NativeBase.Button': {
       justifyContent: 'center',
@@ -66,7 +110,7 @@ export default (variables = variable) => {
       alignItems: 'center',
       '.transparent': {
         'NativeBase.Text': {
-          color: variables.toolbarBtnColor,
+          color: variables.toolbarBtnTextColor,
           fontWeight: '600'
         },
         'NativeBase.Icon': {
@@ -97,8 +141,8 @@ export default (variables = variable) => {
         },
         'NativeBase.Input': {
           alignSelf: 'center',
-          lineHeight: 24,
-          height: variables.searchBarHeight
+          lineHeight: null,
+          height: variables.searchBarInputHeight
         },
         alignSelf: 'center',
         alignItems: 'center',
@@ -139,10 +183,10 @@ export default (variables = variable) => {
             marginLeft: 2
           },
           'NativeBase.Text': {
-            color: variables.toolbarBtnColor,
-            fontSize: 17,
-            marginLeft: 2,
-            lineHeight: 21
+            color: variables.toolbarBtnTextColor,
+            fontSize: platform === 'ios' ? 17 : 0,
+            marginLeft: 7,
+            lineHeight: 19.5
           },
           'NativeBase.IconNB': {
             color: variables.toolbarBtnColor,
@@ -153,25 +197,35 @@ export default (variables = variable) => {
           }
         },
         '.transparent': {
-          marginLeft: -3,
+          marginLeft: platform === 'ios' && platformStyle !== 'material' ? -3 : 0,
           'NativeBase.Icon': {
             color: variables.toolbarBtnColor,
-            fontSize: variables.iconHeaderSize,
-            marginTop: 2,
+            fontSize:
+              platform === 'ios' && variables.platformStyle !== 'material'
+                ? variables.iconHeaderSize + 1
+                : variables.iconHeaderSize,
+            marginTop: 0,
             marginRight: 2,
-            marginLeft: 2
+            marginLeft: 1,
+            paddingTop: 1
           },
           'NativeBase.IconNB': {
             color: variables.toolbarBtnColor,
-            fontSize: variables.iconHeaderSize,
-            marginTop: 2,
+            fontSize:
+              platform === 'ios' && variables.platformStyle !== 'material'
+                ? variables.iconHeaderSize + 1
+                : variables.iconHeaderSize - 2,
+            marginTop: 0,
             marginRight: 2,
-            marginLeft: 2
+            marginLeft: 1,
+            paddingTop: 1
           },
           'NativeBase.Text': {
-            color: variables.toolbarBtnColor,
-            fontSize: 17,
-            top: platform === 'ios' ? undefined : -1.5
+            color: variables.toolbarBtnTextColor,
+            fontSize: platform === 'ios' ? 17 : 0,
+            top: platform === 'ios' ? 1 : -1.5,
+            paddingLeft: platform === 'ios' && platformStyle !== 'material' ? 2 : 5,
+            paddingRight: platform === 'ios' && platformStyle !== 'material' ? undefined : 10
           },
           backgroundColor: 'transparent',
           borderColor: null,
@@ -188,9 +242,10 @@ export default (variables = variable) => {
           color: variables.toolbarBtnColor
         },
         alignSelf: null,
-        paddingHorizontal: variables.buttonPadding
+        paddingRight: variables.buttonPadding,
+        paddingLeft: platform === 'ios' && platformStyle !== 'material' ? 4 : 8
       },
-      flex: platform === 'ios' && platformStyle !== 'material' ? 1 : 0.5,
+      flex: platform === 'ios' && platformStyle !== 'material' ? 1 : 0.4,
       alignSelf: 'center',
       alignItems: 'flex-start'
     },
@@ -218,12 +273,6 @@ export default (variables = variable) => {
           color: variables.inverseTextColor,
           backgroundColor: 'transparent'
         }
-      },
-      'NativeBase.Icon': {
-        color: variables.toolbarBtnColor
-      },
-      'NativeBase.IconNB': {
-        color: variables.toolbarBtnColor
       }
     },
     'NativeBase.Right': {
@@ -238,9 +287,9 @@ export default (variables = variable) => {
             marginLeft: 5
           },
           'NativeBase.Text': {
-            color: variables.toolbarBtnColor,
-            fontSize: 17,
-            lineHeight: 21
+            color: variables.toolbarBtnTextColor,
+            fontSize: platform === 'ios' ? 17 : 14,
+            lineHeight: 19.5
           },
           'NativeBase.IconNB': {
             color: variables.toolbarBtnColor,
@@ -251,27 +300,32 @@ export default (variables = variable) => {
           }
         },
         '.transparent': {
-          marginRight: -8,
+          marginRight: platform === 'ios' ? -9 : -5,
+          paddingLeft: 15,
+          paddingRight: 12,
           paddingHorizontal: 15,
           borderRadius: 50,
           'NativeBase.Icon': {
             color: variables.toolbarBtnColor,
-            fontSize: platform === 'ios' ? variables.iconHeaderSize - 6 : variables.iconHeaderSize - 2,
-            marginTop: 2,
+            fontSize: variables.iconHeaderSize - 2,
+            marginTop: 0,
             marginLeft: 2,
-            marginRight: 2
+            marginRight: 0
+            // paddingTop: 0
           },
           'NativeBase.IconNB': {
             color: variables.toolbarBtnColor,
-            fontSize: platform === 'ios' ? variables.iconHeaderSize - 6 : variables.iconHeaderSize - 2,
-            marginTop: 2,
+            fontSize: variables.iconHeaderSize - 2,
+            marginTop: 0,
             marginLeft: 2,
-            marginRight: 2
+            marginRight: 0
+            // paddingTop: 0
           },
           'NativeBase.Text': {
-            color: variables.toolbarBtnColor,
-            fontSize: 17,
-            top: platform === 'ios' ? undefined : -1.5
+            color: variables.toolbarBtnTextColor,
+            fontSize: platform === 'ios' ? 17 : 14,
+            top: platform === 'ios' ? 1 : -1.5,
+            paddingRight: platform === 'ios' && variables.platformStyle !== 'material' ? 0 : undefined
           },
           backgroundColor: 'transparent',
           borderColor: null,
@@ -298,12 +352,17 @@ export default (variables = variable) => {
     },
     backgroundColor: variables.toolbarDefaultBg,
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
+    paddingLeft: platform === 'ios' && variables.platformStyle !== 'material' ? 6 : 10,
+    paddingRight: 10,
     justifyContent: 'center',
-    paddingTop: platform === 'ios' ? 15 : 0,
+    paddingTop: platform === 'ios' ? 18 : 0,
     borderBottomWidth: platform === 'ios' ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
     borderBottomColor: variables.toolbarDefaultBorder,
-    height: variables.toolbarHeight,
+    height:
+      variables.platform === 'ios' && variables.platformStyle === 'material'
+        ? variables.toolbarHeight + 10
+        : variables.toolbarHeight,
     elevation: 3,
     shadowColor: platformStyle === 'material' ? '#000' : undefined,
     shadowOffset: platformStyle === 'material' ? { width: 0, height: 2 } : undefined,

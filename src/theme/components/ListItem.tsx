@@ -1,10 +1,18 @@
-import { Platform, PixelRatio } from 'react-native';
+import { PixelRatio, Platform } from 'react-native';
 
-// import pickerTheme from "./Picker";
+import pickerTheme from './Picker';
 import variable from './../variables/platform';
 
 export default (variables = variable) => {
   const platform = variables.platform;
+  const selectedStyle = {
+    'NativeBase.Text': {
+      color: variables.listItemSelected
+    },
+    'NativeBase.Icon': {
+      color: variables.listItemSelected
+    }
+  };
 
   const listItemTheme = {
     'NativeBase.InputGroup': {
@@ -18,7 +26,7 @@ export default (variables = variable) => {
         paddingHorizontal: 5
       },
       flex: 1,
-      borderWidth: undefined,
+      borderWidth: null,
       margin: -10,
       borderBottomColor: 'transparent'
     },
@@ -34,7 +42,7 @@ export default (variables = variable) => {
         },
         'NativeBase.IconNB': {
           backgroundColor: 'transparent',
-          color: undefined,
+          color: null,
           alignSelf: 'center'
         },
         'NativeBase.Input': {
@@ -54,16 +62,16 @@ export default (variables = variable) => {
           'NativeBase.Text': {
             fontWeight: '500'
           },
-          paddingHorizontal: undefined,
-          paddingLeft: platform === 'ios' ? 10 : undefined
+          paddingHorizontal: null,
+          paddingLeft: platform === 'ios' ? 10 : null
         },
-        paddingHorizontal: platform === 'ios' ? undefined : undefined,
+        paddingHorizontal: platform === 'ios' ? undefined : null,
         width: platform === 'ios' ? undefined : 0,
         height: platform === 'ios' ? undefined : 0
       },
       backgroundColor: variables.toolbarInputColor,
       padding: 10,
-      marginLeft: undefined
+      marginLeft: null
     },
     'NativeBase.CheckBox': {
       marginLeft: -10,
@@ -78,8 +86,8 @@ export default (variables = variable) => {
       '.first': {
         paddingTop: variables.listItemPadding + 3
       },
-      borderBottomWidth: platform === 'ios' ? variables.borderWidth : undefined,
-      marginLeft: undefined,
+      borderBottomWidth: platform === 'ios' ? variables.borderWidth : null,
+      marginLeft: null,
       padding: variables.listItemPadding,
       paddingLeft: variables.listItemPadding + 5,
       paddingTop: platform === 'ios' ? variables.listItemPadding + 25 : undefined,
@@ -92,8 +100,8 @@ export default (variables = variable) => {
       }
     },
     '.itemDivider': {
-      borderBottomWidth: undefined,
-      marginLeft: undefined,
+      borderBottomWidth: null,
+      marginLeft: null,
       padding: variables.listItemPadding,
       paddingLeft: variables.listItemPadding + 5,
       backgroundColor: variables.listDividerBg,
@@ -102,13 +110,15 @@ export default (variables = variable) => {
     },
     '.selected': {
       'NativeBase.Left': {
-        'NativeBase.Text': {
-          color: variables.brandPrimary
-        }
+        ...selectedStyle
       },
-      'NativeBase.Text': {
-        color: variables.brandPrimary
-      }
+      'NativeBase.Body': {
+        ...selectedStyle
+      },
+      'NativeBase.Right': {
+        ...selectedStyle
+      },
+      ...selectedStyle
     },
     'NativeBase.Left': {
       'NativeBase.Body': {
@@ -120,8 +130,8 @@ export default (variables = variable) => {
           fontWeight: '600'
         },
         marginLeft: 10,
-        alignItems: undefined,
-        alignSelf: undefined
+        alignItems: null,
+        alignSelf: null
       },
       'NativeBase.Icon': {
         width: variables.iconFontSize - 10,
@@ -132,7 +142,6 @@ export default (variables = variable) => {
         fontSize: variables.iconFontSize - 10
       },
       'NativeBase.Text': {
-        marginLeft: 10,
         alignSelf: 'center'
       },
       flexDirection: 'row'
@@ -145,12 +154,12 @@ export default (variables = variable) => {
           fontWeight: '200'
         }
       },
-      alignSelf: undefined,
-      alignItems: undefined
+      alignSelf: null,
+      alignItems: null
     },
     'NativeBase.Right': {
       'NativeBase.Badge': {
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.PickerNB': {
         'NativeBase.Button': {
@@ -161,7 +170,7 @@ export default (variables = variable) => {
         }
       },
       'NativeBase.Button': {
-        alignSelf: undefined,
+        alignSelf: null,
         '.transparent': {
           'NativeBase.Text': {
             color: variables.topTabBarActiveTextColor
@@ -169,12 +178,12 @@ export default (variables = variable) => {
         }
       },
       'NativeBase.Icon': {
-        alignSelf: undefined,
+        alignSelf: null,
         fontSize: variables.iconFontSize - 8,
         color: '#c9c8cd'
       },
       'NativeBase.IconNB': {
-        alignSelf: undefined,
+        alignSelf: null,
         fontSize: variables.iconFontSize - 8,
         color: '#c9c8cd'
       },
@@ -183,24 +192,24 @@ export default (variables = variable) => {
           color: variables.listNoteColor,
           fontWeight: '200'
         },
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.Thumbnail': {
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.Image': {
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.Radio': {
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.Checkbox': {
-        alignSelf: undefined
+        alignSelf: null
       },
       'NativeBase.Switch': {
-        alignSelf: undefined
+        alignSelf: null
       },
-      padding: undefined,
+      padding: null,
       flex: 0.28
     },
     'NativeBase.Text': {
@@ -210,20 +219,20 @@ export default (variables = variable) => {
       },
       alignSelf: 'center'
     },
-
     '.last': {
       marginLeft: -(variables.listItemPadding + 5),
       paddingLeft: (variables.listItemPadding + 5) * 2,
       top: 1
     },
-
     '.avatar': {
       'NativeBase.Left': {
-        flex: 0
+        flex: 0,
+        alignSelf: 'flex-start',
+        paddingTop: 14
       },
       'NativeBase.Body': {
         'NativeBase.Text': {
-          marginLeft: undefined
+          marginLeft: null
         },
         flex: 1,
         paddingVertical: variables.listItemPadding,
@@ -244,21 +253,28 @@ export default (variables = variable) => {
         borderBottomWidth: variables.borderWidth,
         borderColor: variables.listBorderColor
       },
-      borderBottomWidth: undefined,
-      paddingVertical: undefined,
-      paddingRight: undefined
+      '.noBorder': {
+        'NativeBase.Body': {
+          borderBottomWidth: null
+        },
+        'NativeBase.Right': {
+          borderBottomWidth: null
+        }
+      },
+      borderBottomWidth: null,
+      paddingVertical: null,
+      paddingRight: null
     },
-
     '.thumbnail': {
       'NativeBase.Left': {
         flex: 0
       },
       'NativeBase.Body': {
         'NativeBase.Text': {
-          marginLeft: undefined
+          marginLeft: null
         },
         flex: 1,
-        paddingVertical: variables.listItemPadding + 5,
+        paddingVertical: variables.listItemPadding + 8,
         borderBottomWidth: variables.borderWidth,
         borderColor: variables.listBorderColor,
         marginLeft: variables.listItemPadding + 5
@@ -271,7 +287,7 @@ export default (variables = variable) => {
               color: variables.sTabBarActiveTextColor
             }
           },
-          height: undefined
+          height: null
         },
         flex: 0,
         justifyContent: 'center',
@@ -281,18 +297,25 @@ export default (variables = variable) => {
         borderBottomWidth: variables.borderWidth,
         borderColor: variables.listBorderColor
       },
-      borderBottomWidth: undefined,
-      paddingVertical: undefined,
-      paddingRight: undefined
+      '.noBorder': {
+        'NativeBase.Body': {
+          borderBottomWidth: null
+        },
+        'NativeBase.Right': {
+          borderBottomWidth: null
+        }
+      },
+      borderBottomWidth: null,
+      paddingVertical: null,
+      paddingRight: null
     },
-
     '.icon': {
       '.last': {
         'NativeBase.Body': {
-          borderBottomWidth: undefined
+          borderBottomWidth: null
         },
         'NativeBase.Right': {
-          borderBottomWidth: undefined
+          borderBottomWidth: null
         },
         borderBottomWidth: variables.borderWidth,
         borderColor: variables.listBorderColor
@@ -300,19 +323,19 @@ export default (variables = variable) => {
       'NativeBase.Left': {
         'NativeBase.Button': {
           'NativeBase.IconNB': {
-            marginHorizontal: undefined,
+            marginHorizontal: null,
             fontSize: variables.iconFontSize - 5
           },
           'NativeBase.Icon': {
-            marginHorizontal: undefined,
+            marginHorizontal: null,
             fontSize: variables.iconFontSize - 8
           },
           alignSelf: 'center',
           height: 29,
           width: 29,
           borderRadius: 6,
-          paddingVertical: undefined,
-          paddingHorizontal: undefined,
+          paddingVertical: null,
+          paddingHorizontal: null,
           alignItems: 'center',
           justifyContent: 'center'
         },
@@ -332,7 +355,7 @@ export default (variables = variable) => {
       },
       'NativeBase.Body': {
         'NativeBase.Text': {
-          marginLeft: undefined,
+          marginLeft: null,
           fontSize: 17
         },
         flex: 1,
@@ -363,11 +386,11 @@ export default (variables = variable) => {
         },
         'NativeBase.Switch': {
           marginRight: Platform.OS === 'ios' ? undefined : -5,
-          alignSelf: undefined
+          alignSelf: null
         },
-        // "NativeBase.PickerNB": {
-        // 	...pickerTheme(),
-        // },
+        'NativeBase.PickerNB': {
+          ...pickerTheme()
+        },
         flexDirection: 'row',
         alignItems: 'center',
         flex: 0,
@@ -378,22 +401,35 @@ export default (variables = variable) => {
         borderColor: variables.listBorderColor,
         paddingRight: variables.listItemPadding + 5
       },
-      borderBottomWidth: undefined,
-      paddingVertical: undefined,
-      paddingRight: undefined,
+      '.noBorder': {
+        'NativeBase.Body': {
+          borderBottomWidth: null
+        },
+        'NativeBase.Right': {
+          borderBottomWidth: null
+        }
+      },
+      borderBottomWidth: null,
+      paddingVertical: null,
+      paddingRight: null,
       height: 44,
       justifyContent: 'center'
     },
     '.noBorder': {
-      borderBottomWidth: undefined
+      borderBottomWidth: null
+    },
+    '.noIndent': {
+      marginLeft: null,
+      padding: variables.listItemPadding,
+      paddingLeft: variables.listItemPadding + 6
     },
     alignItems: 'center',
     flexDirection: 'row',
-    paddingRight: variables.listItemPadding + 5,
+    paddingRight: variables.listItemPadding + 6,
     paddingVertical: variables.listItemPadding + 3,
-    marginLeft: variables.listItemPadding + 5,
+    marginLeft: variables.listItemPadding + 6,
     borderBottomWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
-    // backgroundColor: variables.listBg,
+    backgroundColor: variables.listBg,
     borderColor: variables.listBorderColor
   };
 

@@ -1,4 +1,6 @@
-export default () => {
+import variable from './../variables/platform';
+
+export default (variables = variable) => {
   const swipeRowTheme = {
     'NativeBase.ListItem': {
       '.list': {
@@ -8,8 +10,8 @@ export default () => {
     },
     'NativeBase.Left': {
       flex: 0,
-      alignSelf: undefined,
-      alignItems: undefined,
+      alignSelf: null,
+      alignItems: null,
       'NativeBase.Button': {
         flex: 1,
         alignItems: 'center',
@@ -20,8 +22,8 @@ export default () => {
     },
     'NativeBase.Right': {
       flex: 0,
-      alignSelf: undefined,
-      alignItems: undefined,
+      alignSelf: null,
+      alignItems: null,
       'NativeBase.Button': {
         flex: 1,
         alignItems: 'center',
@@ -32,7 +34,7 @@ export default () => {
     },
     'NativeBase.Button': {
       flex: 1,
-      height: undefined,
+      height: null,
       alignItems: 'center',
       justifyContent: 'center',
       alignSelf: 'stretch',

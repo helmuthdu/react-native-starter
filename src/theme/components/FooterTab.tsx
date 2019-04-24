@@ -64,7 +64,7 @@ export default (variables = variable) => {
         lineHeight: 16
       }
     },
-    backgroundColor: Platform.OS === 'android' ? variables.tabActiveBgColor : undefined,
+    backgroundColor: Platform.OS === 'android' ? variables.footerDefaultBg : undefined,
     flexDirection: 'row',
     justifyContent: 'space-between',
     flex: 1,

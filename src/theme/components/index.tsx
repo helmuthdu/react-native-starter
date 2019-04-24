@@ -40,19 +40,20 @@ import cardItemTheme from './CardItem';
 import listItemTheme from './ListItem';
 import formTheme from './Form';
 import separatorTheme from './Separator';
+import pickerTheme from './Picker';
 import variable from './../variables/platform';
 
 export default (variables = variable) => {
   const theme = {
     variables,
     'NativeBase.Left': {
-      ...leftTheme()
+      ...leftTheme(variables)
     },
     'NativeBase.Right': {
-      ...rightTheme()
+      ...rightTheme(variables)
     },
     'NativeBase.Body': {
-      ...bodyTheme()
+      ...bodyTheme(variables)
     },
 
     'NativeBase.Header': {
@@ -91,7 +92,7 @@ export default (variables = variable) => {
     },
 
     'NativeBase.Card': {
-      ...cardTheme()
+      ...cardTheme(variables)
     },
 
     'NativeBase.CardItem': {
@@ -116,7 +117,7 @@ export default (variables = variable) => {
     },
 
     'NativeBase.Container': {
-      ...containerTheme()
+      ...containerTheme(variables)
     },
     'NativeBase.Content': {
       ...contentTheme(variables)
@@ -152,7 +153,7 @@ export default (variables = variable) => {
       ...textTheme(variables)
     },
     'NativeBase.Spinner': {
-      ...spinnerTheme()
+      ...spinnerTheme(variables)
     },
 
     'NativeBase.Fab': {
@@ -164,7 +165,7 @@ export default (variables = variable) => {
     },
 
     'NativeBase.Label': {
-      ...labelTheme()
+      ...labelTheme(variables)
     },
 
     'NativeBase.Textarea': {
@@ -172,13 +173,14 @@ export default (variables = variable) => {
     },
 
     'NativeBase.PickerNB': {
+      ...pickerTheme(variables),
       'NativeBase.Button': {
         'NativeBase.Text': {}
       }
     },
 
     'NativeBase.Tab': {
-      ...tabTheme()
+      ...tabTheme(variables)
     },
 
     'NativeBase.Segment': {
@@ -198,23 +200,21 @@ export default (variables = variable) => {
       ...tabContainerTheme(variables)
     },
     'NativeBase.Switch': {
-      ...switchTheme()
+      ...switchTheme(variables)
     },
     'NativeBase.Separator': {
       ...separatorTheme(variables)
     },
     'NativeBase.SwipeRow': {
-      ...swipeRowTheme()
+      ...swipeRowTheme(variables)
     },
     'NativeBase.Thumbnail': {
-      ...thumbnailTheme()
+      ...thumbnailTheme(variables)
     }
   };
 
   const cssifyTheme = (grandparent, parent, parentKey) => {
     _.forEach(parent, (style, styleName) => {
-      // console.log('styleName', styleName);
-      // console.log('parentKey', parentKey);
       if (styleName.indexOf('.') === 0 && parentKey && parentKey.indexOf('.') === 0) {
         if (grandparent) {
           if (!grandparent[styleName]) {
@@ -224,13 +224,13 @@ export default (variables = variable) => {
           }
         }
       }
-      if (style && typeof style === 'object') {
+      if (style && typeof style === 'object' && styleName !== 'fontVariant' && styleName !== 'transform') {
         cssifyTheme(parent, style, styleName);
       }
     });
   };
 
-  cssifyTheme(undefined, theme, undefined);
+  cssifyTheme(null, theme, null);
 
   return theme;
 };

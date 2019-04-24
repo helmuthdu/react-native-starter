@@ -1,4 +1,6 @@
-export default () => {
+import variable from './../variables/platform';
+
+export default (variables = variable) => {
   const thumbnailTheme = {
     '.square': {
       borderRadius: 0,

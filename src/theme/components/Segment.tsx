@@ -12,7 +12,8 @@ export default (variables = variable) => {
     'NativeBase.Button': {
       alignSelf: 'center',
       borderRadius: 0,
-      paddingHorizontal: 20,
+      paddingTop: 3,
+      paddingBottom: 3,
       height: 30,
       backgroundColor: 'transparent',
       borderWidth: 1,
@@ -22,6 +23,9 @@ export default (variables = variable) => {
       '.active': {
         backgroundColor: variables.segmentActiveBackgroundColor,
         'NativeBase.Text': {
+          color: variables.segmentActiveTextColor
+        },
+        'NativeBase.Icon': {
           color: variables.segmentActiveTextColor
         }
       },
@@ -37,6 +41,11 @@ export default (variables = variable) => {
       'NativeBase.Text': {
         color: variables.segmentTextColor,
         fontSize: 14
+      },
+      'NativeBase.Icon': {
+        fontSize: 22,
+        paddingTop: 0,
+        color: variables.segmentTextColor
       }
     }
   };

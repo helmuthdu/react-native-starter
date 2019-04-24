@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import variable from './../variables/platform';
 
 export default (variables = variable) => {
@@ -5,7 +7,9 @@ export default (variables = variable) => {
     fontSize: variables.subTitleFontSize,
     fontFamily: variables.titleFontfamily,
     color: variables.subtitleColor,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingLeft: Platform.OS === 'ios' ? 4 : 0,
+    marginLeft: Platform.OS === 'ios' ? undefined : -3
   };
 
   return subtitleTheme;
