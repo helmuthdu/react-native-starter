@@ -1,15 +1,12 @@
-import { WebBrowser } from 'expo';
+import { WebBrowser, Icon } from 'expo';
 import React from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { DrawerActions } from 'react-navigation';
 
 import { MonoText } from '../components/StyledText';
 import { styles } from './styles';
 
 export default class HomeScreen extends React.Component {
-  public static navigationOptions = {
-    header: null
-  };
-
   public render() {
     return (
       <View style={styles.container}>

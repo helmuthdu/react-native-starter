@@ -8,12 +8,12 @@ const routes = [
     caption: 'Home'
   },
   {
-    route: 'BlankPage',
-    caption: 'Blank Page'
+    route: 'Links',
+    caption: 'Links'
   },
   {
-    route: 'Login',
-    caption: 'Logout'
+    route: 'Settings',
+    caption: 'Settings'
   }
 ];
 

@@ -4,10 +4,6 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { styles } from './styles';
 
 export default class LinksScreen extends React.Component {
-  public static navigationOptions = {
-    title: 'Links'
-  };
-
   public render() {
     return (
       <ScrollView style={styles.container}>

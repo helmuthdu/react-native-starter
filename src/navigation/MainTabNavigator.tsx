@@ -1,19 +1,39 @@
+import { Icon } from 'expo';
 import React from 'react';
 import { Dimensions, Platform } from 'react-native';
-import { createBottomTabNavigator, createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createDrawerNavigator, createStackNavigator, DrawerActions } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import { Icon } from 'native-base';
 import Sidebar from '../screens/sidebar';
 
 const deviceWidth = Dimensions.get('window').width;
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: `Home`,
+          headerLeft: (
+            <Icon.Ionicons
+              name="md-menu"
+              size={30}
+              onPress={() => {
+                navigation.dispatch(DrawerActions.openDrawer());
+              }}
+            />
+          ),
+          headerStyle: {
+            textAlign: 'center',
+            alignContent: 'center'
+          }
+        };
+      }
+    }
   },
   {}
 );
@@ -25,82 +45,91 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-information-circle${focused ? '' : '-outline'}` : 'md-information-circle'}
     />
-  ),
-  title: `Home`,
-  headerLeft: ({ navigation }) => (
-    <Icon
-      name="md-menu"
-      size={30}
-      onPress={() => {
-        navigation.openDrawer();
-      }}
-    />
-  ),
-  headerStyle: {
-    textAlign: 'center',
-    alignContent: 'center'
-  }
+  )
 };
 
 const LinksStack = createStackNavigator({
-  Links: LinksScreen
+  Links: {
+    screen: LinksScreen,
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: `Links`,
+        headerLeft: (
+          <Icon.Ionicons
+            name="md-menu"
+            size={30}
+            onPress={() => {
+              navigation.dispatch(DrawerActions.openDrawer());
+            }}
+          />
+        ),
+        headerStyle: {
+          textAlign: 'center',
+          alignContent: 'center'
+        }
+      };
+    }
+  }
 });
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />,
-  title: `Home`,
-  headerLeft: ({ navigation }) => (
-    <Icon
-      name="md-menu"
-      size={30}
-      onPress={() => {
-        navigation.openDrawer();
-      }}
-    />
-  ),
-  headerStyle: {
-    textAlign: 'center',
-    alignContent: 'center'
-  }
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
 };
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+  Settings: {
+    screen: SettingsScreen,
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: `app.json`,
+        headerLeft: (
+          <Icon.Ionicons
+            name="md-menu"
+            size={30}
+            onPress={() => {
+              navigation.dispatch(DrawerActions.openDrawer());
+            }}
+          />
+        ),
+        headerStyle: {
+          textAlign: 'center',
+          alignContent: 'center'
+        }
+      };
+    }
+  }
 });
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-  title: `Home`,
-  headerLeft: ({ navigation }) => (
-    <Icon
-      name="md-menu"
-      size={30}
-      onPress={() => {
-        navigation.openDrawer();
-      }}
-    />
-  ),
-  headerStyle: {
-    textAlign: 'center',
-    alignContent: 'center'
-  }
+  )
 };
 
-export const bottomNavigation = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack
+export const TabNavigation = createBottomTabNavigator({
+  Home: HomeStack,
+  Links: LinksStack,
+  Settings: SettingsStack
 });
 
-export const drawerNavigation = createDrawerNavigator(
+export const DrawerNavigation = createDrawerNavigator(
   {
-    HomeStack,
-    LinksStack,
-    SettingsStack
+    Home: HomeStack,
+    Links: LinksStack,
+    Settings: SettingsStack
+  },
+  {
+    drawerWidth: deviceWidth - 50,
+    drawerPosition: 'left'
+    // contentComponent: props => <Sidebar {...props} />
+  }
+);
+
+export const ComposedNavigation = createDrawerNavigator(
+  {
+    Bottom: TabNavigation
   },
   {
     drawerWidth: deviceWidth - 50,
@@ -108,3 +137,5 @@ export const drawerNavigation = createDrawerNavigator(
     contentComponent: props => <Sidebar {...props} />
   }
 );
+
+export default ComposedNavigation;
