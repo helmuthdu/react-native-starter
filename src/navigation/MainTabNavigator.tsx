@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import { Icon } from 'native-base';
-import Sidebar from '../screens/Sidebar';
+import Sidebar from '../screens/sidebar';
 
 const deviceWidth = Dimensions.get('window').width;
 
