@@ -1,51 +1,13 @@
-import React from 'react';
-import { Text, Container, List, ListItem, Content } from 'native-base';
-import { NavigationActions } from 'react-navigation';
-
-const routes = [
-  {
-    route: 'Home',
-    caption: 'Home'
-  },
-  {
-    route: 'Links',
-    caption: 'Links'
-  },
-  {
-    route: 'Settings',
-    caption: 'Settings'
-  }
-];
+import React, { Component } from 'react';
+import Sidebar from '../../components/sidebar/sidebar.component';
+import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 
 export interface Props {
-  navigation: any;
+  navigation: NavigationScreenProp<NavigationRoute>;
 }
-export interface State {}
-const resetAction = NavigationActions.navigate({ routeName: 'Login' });
-export default class Sidebar extends React.Component<Props, State> {
-  render() {
-    return (
-      <Container>
-        <Content>
-          <List
-            style={{ marginTop: 40 }}
-            dataArray={routes}
-            renderRow={data => {
-              return (
-                <ListItem
-                  button
-                  onPress={() => {
-                    data.route === 'Login'
-                      ? this.props.navigation.reset([resetAction], 0)
-                      : this.props.navigation.navigate(data.route);
-                  }}>
-                  <Text>{data.caption}</Text>
-                </ListItem>
-              );
-            }}
-          />
-        </Content>
-      </Container>
-    );
+
+export default class SidebarScreen extends Component<Props> {
+  public render() {
+    return <Sidebar navigation={this.props.navigation} />;
   }
 }

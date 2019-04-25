@@ -1,47 +1,73 @@
 import React from 'react';
-import { Image, Platform } from 'react-native';
-import { Container, Content, Header, Body, Title, Button, Text, View, Icon, Footer } from 'native-base';
-//import styles from "./styles";
+import { Form, Icon, Input, Item, Toast } from 'native-base';
+import { Field, reduxForm } from 'redux-form';
+import Login from '../../components/login/login.component';
+import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
+
+const required = (value?: string) => (value ? undefined : 'Required');
+const maxLength = (max: number) => (value: string) =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+const maxLength15 = maxLength(15);
+const minLength = (min: number) => (value: string) =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined;
+const minLength8 = minLength(8);
+const email = (value: string) =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
+const alphaNumeric = (value: string) =>
+  value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters' : undefined;
+
 export interface Props {
-  loginForm: any;
-  onLogin: Function;
+  navigation: NavigationScreenProp<NavigationRoute>;
+  valid: boolean;
 }
-export interface State {}
-class Login extends React.Component<Props, State> {
-  render() {
+
+class LoginForm extends React.Component<Props, {}> {
+  public textInput: any;
+
+  public renderInput({ input, meta: { touched, error } }: any) {
     return (
-      <Container>
-        <Header style={{ height: 200 }}>
-          <Body style={{ alignItems: 'center' }}>
-            <Icon name="flash" style={{ fontSize: 104 }} />
-            <Title>ReactNativeSeed.com</Title>
-            <View padder>
-              <Text style={{ color: Platform.OS === 'ios' ? '#000' : '#FFF' }} />
-            </View>
-          </Body>
-        </Header>
-        <Content>
-          {this.props.loginForm}
-          <View padder>
-            <Button block onPress={() => this.props.onLogin()}>
-              <Text>Login</Text>
-            </Button>
-          </View>
-        </Content>
-        <Footer style={{ backgroundColor: '#F8F8F8' }}>
-          <View style={{ alignItems: 'center', opacity: 0.5, flexDirection: 'row' }}>
-            <View padder>
-              <Text style={{ color: '#000' }}>Made with love at </Text>
-            </View>
-            <Image
-              source={{ uri: 'https://geekyants.com/images/logo-dark.png' }}
-              style={{ width: 422 / 4, height: 86 / 4 }}
-            />
-          </View>
-        </Footer>
-      </Container>
+      <Item error={error && touched}>
+        <Icon active name={input.name === 'email' ? 'person' : 'unlock'} />
+        <Input
+          ref={c => (this.textInput = c)}
+          placeholder={input.name === 'email' ? 'Email' : 'Password'}
+          secureTextEntry={input.name === 'password'}
+          {...input}
+        />
+      </Item>
     );
+  }
+
+  public login() {
+    if (this.props.valid) {
+      this.props.navigation.navigate('Drawer');
+    } else {
+      Toast.show({
+        text: 'Enter Valid Username & password!',
+        duration: 2000,
+        position: 'top',
+        textStyle: { textAlign: 'center' }
+      });
+    }
+  }
+
+  public render() {
+    const form = (
+      <Form>
+        <Field name="email" component={this.renderInput} validate={[email, required]} />
+        <Field
+          name="password"
+          component={this.renderInput}
+          validate={[alphaNumeric, minLength8, maxLength15, required]}
+        />
+      </Form>
+    );
+    return <Login loginForm={form} onLogin={() => this.login()} />;
   }
 }
 
-export default Login;
+const LoginContainer = reduxForm({
+  form: 'login'
+})(LoginForm);
+
+export default LoginContainer;
