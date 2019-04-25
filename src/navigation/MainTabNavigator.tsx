@@ -38,16 +38,6 @@ const HomeStack = createStackNavigator(
   {}
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-information-circle${focused ? '' : '-outline'}` : 'md-information-circle'}
-    />
-  )
-};
-
 const LinksStack = createStackNavigator({
   Links: {
     screen: LinksScreen,
@@ -71,11 +61,6 @@ const LinksStack = createStackNavigator({
     }
   }
 });
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-};
 
 const SettingsStack = createStackNavigator({
   Settings: {
@@ -101,18 +86,34 @@ const SettingsStack = createStackNavigator({
   }
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  )
-};
-
-export const TabNavigation = createBottomTabNavigator({
-  Home: HomeStack,
-  Links: LinksStack,
-  Settings: SettingsStack
-});
+export const TabNavigation = createBottomTabNavigator(
+  {
+    Home: HomeStack,
+    Links: LinksStack,
+    Settings: SettingsStack
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        switch (routeName) {
+          case 'Home':
+            iconName =
+              Platform.OS === 'ios' ? `ios-information-circle${focused ? '' : '-outline'}` : 'md-information-circle';
+            break;
+          case 'Links':
+            iconName = Platform.OS === 'ios' ? 'ios-link' : 'md-link';
+            break;
+          case 'Settings':
+            iconName = Platform.OS === 'ios' ? 'ios-options' : 'md-options';
+            break;
+        }
+        return <TabBarIcon name={iconName} focused={focused} />;
+      }
+    })
+  }
+);
 
 export const DrawerNavigation = createDrawerNavigator(
   {
