@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 const deviceHeight = Dimensions.get('window').height;
 
-const styles: any = StyleSheet.create({
+export const styles: any = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Platform } from 'react-native';
 import { Body, Button, Container, Content, Footer, Header, Icon, Text, Title, View } from 'native-base';
 
-//import styles from "./styles";
+//import { styles } from "./styles";
 export interface Props {
   loginForm: any;
   onLogin: () => void;
