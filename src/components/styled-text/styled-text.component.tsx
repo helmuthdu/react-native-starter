@@ -2,6 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 type Props = {
+  children: React.ReactNode;
   style?: object;
 };
 

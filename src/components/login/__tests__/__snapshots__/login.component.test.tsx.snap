@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "height": 1334,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#F8F8F8",
+            "borderBottomColor": "#a7a6ab",
+            "borderBottomWidth": 0.5,
+            "elevation": 3,
+            "flexDirection": "row",
+            "height": 64,
+            "justifyContent": "center",
+            "left": 0,
+            "paddingLeft": 6,
+            "paddingRight": 10,
+            "paddingTop": 18,
+            "right": 0,
+            "shadowColor": undefined,
+            "shadowOffset": undefined,
+            "shadowOpacity": undefined,
+            "shadowRadius": undefined,
+            "top": 0,
+          },
+          Object {
+            "height": 200,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "flex": 1,
+            },
+            Object {
+              "alignItems": "center",
+            },
+          ]
+        }
+      >
+        <Text />
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#000",
+              "fontFamily": "System",
+              "fontSize": 17,
+              "fontWeight": "700",
+              "marginLeft": undefined,
+              "paddingLeft": 4,
+              "paddingTop": 1,
+              "textAlign": "center",
+            }
+          }
+        >
+          ReactNativeSeed.com
+        </Text>
+        <View
+          padder={true}
+          style={
+            Object {
+              "paddingBottom": 10,
+              "paddingLeft": 10,
+              "paddingRight": 10,
+              "paddingTop": 10,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#000",
+                },
+              ]
+            }
+            uppercase={false}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#F8F8F8",
+          "borderColor": "#cbcbcb",
+          "borderTopWidth": 0.5,
+          "elevation": 3,
+          "flexDirection": "row",
+          "height": 55,
+          "justifyContent": "center",
+          "left": 0,
+          "paddingBottom": 0,
+          "right": 0,
+        },
+        Object {
+          "backgroundColor": "#F8F8F8",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {},
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "opacity": 0.5,
+          },
+        ]
+      }
+    >
+      <View
+        padder={true}
+        style={
+          Object {
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000",
+                "fontFamily": "System",
+                "fontSize": 16,
+              },
+              Object {
+                "color": "#000",
+              },
+            ]
+          }
+          uppercase={false}
+        >
+          Made with love at 
+        </Text>
+      </View>
+      <Image
+        source={
+          Object {
+            "uri": "https://geekyants.com/images/logo-dark.png",
+          }
+        }
+        style={
+          Object {
+            "height": 21.5,
+            "width": 105.5,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

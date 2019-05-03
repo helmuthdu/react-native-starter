@@ -8,9 +8,7 @@ import createStore from './stores';
 import getTheme from './theme/components';
 import { stores as rootStores } from './stores/modules';
 
-type Props = {
-  skipLoadingScreen?: boolean;
-};
+type Props = {};
 
 type State = Readonly<{
   isLoadingComplete: boolean;
@@ -24,10 +22,10 @@ export default class App extends React.Component<Props, State> {
   };
 
   public render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+    if (!this.state.isLoadingComplete) {
       return (
         <AppLoading
-          startAsync={this._loadResourcesAsync}
+          startAsync={this._loadResourcesAsync as any}
           onError={this._handleLoadingError}
           onFinish={this._handleFinishLoading}
         />
@@ -54,6 +52,7 @@ export default class App extends React.Component<Props, State> {
         // to remove this if you are not using it in your app
         'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
         Roboto: require('native-base/Fonts/Roboto.ttf'),
+        // eslint-disable-next-line @typescript-eslint/camelcase
         Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
       })
     ]);

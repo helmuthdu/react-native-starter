@@ -1,8 +1,8 @@
 import React from 'react';
-import { ExpoLinksView } from '@expo/samples';
+import * as Samples from '@expo/samples';
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { Body, Button, Container, Content, Header, Icon, Left, Right, Title } from 'native-base';
-import { styles } from './links.component.styl';
+import { styles } from './links.style';
 import { ScrollView } from 'react-native';
 
 export const Links = (props: { navigation: NavigationScreenProp<NavigationRoute> }) => (
@@ -24,7 +24,7 @@ export const Links = (props: { navigation: NavigationScreenProp<NavigationRoute>
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your
          * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        <Samples.ExpoLinksView />
       </ScrollView>
     </Content>
   </Container>

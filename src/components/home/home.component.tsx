@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Body, Button, Container, Content, Header, Icon, Left, List, ListItem, Right, Text, Title } from 'native-base';
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
-import { styles } from './home.component.styl';
+import { styles } from './home.style';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { MonoText } from '../styled-text/styled-text.component';
 import { WebBrowser } from 'expo';

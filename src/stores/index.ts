@@ -13,7 +13,7 @@ let storeInstance: StoreInstance;
 export default (
   // eslint-disable-next-line
   stores: { name: string; sagas?: any; reducer?: object }[] = [],
-  onCompletion: () => void
+  onCompletion?: () => void
 ) => {
   if (storeInstance) {
     return storeInstance;
@@ -39,7 +39,9 @@ export default (
     yield all(stores.filter(str => str.sagas).map(str => spawn(str.sagas)));
   });
 
-  persistStore(store, {}, onCompletion);
+  if (onCompletion) {
+    persistStore(store, {}, onCompletion);
+  }
 
   storeInstance = store;
 
