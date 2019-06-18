@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Body, Button, Container, Content, Header, Icon, Left, List, ListItem, Right, Text, Title } from 'native-base';
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { styles } from './home.style';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { MonoText } from '../styled-text/styled-text.component';
 import { WebBrowser } from 'expo';
 
@@ -61,8 +61,10 @@ class Home extends Component<Props> {
             </View>
 
             <View style={styles.linksContainer}>
-              <List>
-                {list.map((item: string, index: number) => (
+              <FlatList
+                data={list}
+                keyExtractor={item => item}
+                renderItem={({ item, index }) => (
                   <ListItem
                     key={index}
                     onPress={() =>
@@ -72,8 +74,8 @@ class Home extends Component<Props> {
                     }>
                     <Text>{item}</Text>
                   </ListItem>
-                ))}
-              </List>
+                )}
+              />
             </View>
 
             <View style={styles.tabBarInfoContainer}>

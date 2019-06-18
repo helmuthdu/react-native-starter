@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@expo/samples": "3.0.2",
+    "@expo/vector-icons": "^10.0.2",
     "expo": "^33.0.6",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
@@ -28,8 +29,6 @@
     "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.3",
     "redux-thunk": "^2.3.0",
-    "remote-redux-devtools": "^0.5.16",
-    "remote-redux-devtools-on-debugger": "^0.8.3",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.2",
     "sentry-expo": "^1.13.0"

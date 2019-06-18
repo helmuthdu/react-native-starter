@@ -66,8 +66,7 @@ class LoginForm extends React.Component<Props, {}> {
   }
 }
 
-const LoginContainer = reduxForm({
+export default reduxForm({
   form: 'login'
+  // @ts-ignore
 })(LoginForm);
-
-export default LoginContainer;

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Content, List, ListItem, Text } from 'native-base';
+import { Container, Content, ListItem, Text } from 'native-base';
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
+import { FlatList } from 'react-native';
 
 const routes = [
   {
@@ -24,16 +25,15 @@ export interface Props {
 export const Sidebar = (props: Props) => (
   <Container>
     <Content>
-      <List
+      <FlatList
         style={{ marginTop: 40 }}
-        dataArray={routes}
-        renderRow={data => {
-          return (
-            <ListItem button onPress={() => props.navigation.navigate(data.route)}>
-              <Text>{data.caption}</Text>
-            </ListItem>
-          );
-        }}
+        data={routes}
+        keyExtractor={item => item.route}
+        renderItem={({ item, index }) => (
+          <ListItem button onPress={() => props.navigation.navigate(item.route)}>
+            <Text>{item.caption}</Text>
+          </ListItem>
+        )}
       />
     </Content>
   </Container>

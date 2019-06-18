@@ -3,7 +3,6 @@ import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import { all, spawn } from 'redux-saga/effects';
 import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'remote-redux-devtools';
 import { reducer as formReducer } from 'redux-form';
 
 type StoreInstance = Store;
@@ -22,9 +21,7 @@ export default (
   const sagaMiddleware = createSagaMiddleware();
   const middleware = [thunkMiddleware, sagaMiddleware];
 
-  const composedEnhancers = (__DEV__ ? composeWithDevTools({ realtime: true }) : compose)(
-    applyMiddleware(...middleware)
-  );
+  const composedEnhancers = compose(applyMiddleware(...middleware));
 
   // Create the store
   const store = createStore(
