@@ -1,15 +1,9 @@
 import React from 'react';
 import { Dimensions, Platform } from 'react-native';
-import {
-  createAppContainer,
-  createBottomTabNavigator,
-  createDrawerNavigator,
-  createStackNavigator,
-  createSwitchNavigator,
-  DrawerItemsProps,
-  NavigationScreenConfigProps,
-  TabBarIconProps
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, NavigationScreenConfigProps } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { TabBarIcon } from '../components/tab-bar-icon/tab-bar-icon.component';
 
@@ -57,7 +51,7 @@ export const TabNavigation = createBottomTabNavigator(
   },
   {
     defaultNavigationOptions: ({ navigation }: NavigationScreenConfigProps) => ({
-      tabBarIcon({ focused }: TabBarIconProps) {
+      tabBarIcon({ focused }: any) {
         const { routeName } = navigation.state;
         let iconName = '';
         switch (routeName) {
@@ -97,8 +91,8 @@ export const ComposedNavigation = createDrawerNavigator(
   {
     drawerWidth: deviceWidth - 50,
     drawerPosition: 'left',
-    contentComponent(props: DrawerItemsProps) {
-      return <Sidebar {...props as any} />;
+    contentComponent(props: object) {
+      return <Sidebar {...(props as any)} />;
     }
   }
 );
