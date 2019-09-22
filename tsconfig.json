@@ -12,10 +12,9 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
-    "rootDir": "src",
+    "rootDir": "app",
     "target": "esnext"
   },
   "types": ["react", "react-native", "jest"],
-  "exclude": ["android",
-    "App", "ios", "build", "node_modules"]
+  "exclude": ["android", "App", "ios", "build", "node_modules"]
 }
