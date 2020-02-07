@@ -1,6 +1,5 @@
 import { Form, Icon, Input, Item, Toast } from 'native-base';
 import React, { Component } from 'react';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { Field, reduxForm } from 'redux-form';
 import Login from '../../components/login/login.component';
 
@@ -17,7 +16,7 @@ const alphaNumeric = (value: string) =>
   value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters' : undefined;
 
 export interface Props {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
   valid: boolean;
 }
 class LoginForm extends Component<Props, {}> {

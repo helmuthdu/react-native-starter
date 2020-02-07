@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { Settings } from '../../components/settings/settings.component';
 
 export interface Props {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
 }
 
 export default class SettingsScreen extends Component<Props> {

@@ -2,12 +2,11 @@ import { WebBrowser } from 'expo';
 import { Body, Button, Container, Content, Header, Icon, Left, ListItem, Right, Text, Title } from 'native-base';
 import React, { Component } from 'react';
 import { FlatList, Image, ScrollView, TouchableOpacity, View } from 'react-native';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { MonoText } from '../styled-text/styled-text.component';
 import { styles } from './home.style';
 
 export interface Props {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
   list: string[];
 }
 class Home extends Component<Props> {

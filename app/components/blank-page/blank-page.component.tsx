@@ -1,11 +1,10 @@
 import { Body, Button, Container, Content, Header, Icon, Left, Right, Text, Title } from 'native-base';
 import React from 'react';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 
 import { styles } from './blank-page.style';
 
 export interface Props {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
 }
 
 const BlankPage = (props: Props) => {

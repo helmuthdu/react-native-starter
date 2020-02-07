@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { connect } from 'react-redux';
 import Home from '../../components/home/home.component';
 import { selectors as loadingSelectors } from '../../stores/modules/loading';
 
 export interface Props {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
   fetchList: Function;
 }
 

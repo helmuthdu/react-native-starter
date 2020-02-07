@@ -1,11 +1,10 @@
 import { ExpoConfigView } from '@expo/samples';
 import { Body, Button, Container, Content, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation';
 import { styles } from './settings.style';
 
 type Props = {
-  navigation: NavigationScreenProp<NavigationRoute>;
+  navigation: any;
 };
 
 export const Settings = (props: Props) => (
